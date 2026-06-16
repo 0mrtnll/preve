@@ -1,0 +1,2589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prevencion Engenharia | Segurança contra Incêndio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(60px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(60px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rotateIn {
+            from { opacity: 0; transform: rotate(-10deg) scale(0.9); }
+            to { opacity: 1; transform: rotate(0) scale(1); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(26, 92, 26, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(26, 92, 26, 0.6); }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes lineGrow {
+            from { width: 0; }
+            to { width: 80px; }
+        }
+
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            0%, 100% { border-right-color: transparent; }
+            50% { border-right-color: #fff; }
+        }
+
+        /* ==================== NAVBAR ==================== */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        nav.scrolled {
+            padding: 0.6rem 2rem;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0a3d0a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(26, 92, 26, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.3rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #1a5c1a, #4a9e4a);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: #1a5c1a;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d) !important;
+            color: #fff !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 50px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s !important;
+            box-shadow: 0 4px 15px rgba(26, 92, 26, 0.3);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 92, 26, 0.4) !important;
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: linear-gradient(135deg, #0a3d0a 0%, #1a5c1a 30%, #247024 60%, #2d8a2d 100%);
+            color: #fff;
+            padding: 10rem 2rem 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #3ddc84;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #6aaa6a, #8abf8a, #6aaa6a);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-white {
+            background: #fff;
+            color: #1a5c1a;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(26, 92, 26, 0.4);
+        }
+
+        .btn-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(26, 92, 26, 0.5);
+        }
+
+        .hero-wave {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+        }
+
+        .hero-wave svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* ==================== STATS BAR ==================== */
+        .stats-bar {
+            background: #fff;
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 4;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #1a5c1a;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .stat-divider {
+            width: 1px;
+            background: #e0e0e0;
+            margin: 0.5rem 0;
+        }
+
+        /* ==================== SECTION STYLES ==================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(26, 92, 26, 0.1), rgba(45, 138, 45, 0.1));
+            color: #1a5c1a;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0a3d0a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .section-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #1a5c1a, #4a9e4a);
+            margin: 1.5rem auto 0;
+            border-radius: 4px;
+        }
+
+        /* ==================== SOBRE ==================== */
+        .about {
+            padding: 7rem 2rem;
+            background: #fff;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            animation: fadeInLeft 0.8s ease-out;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #c5e1c5, #8abf8a);
+            border-radius: 24px;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(26, 92, 26, 0.15);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(26, 92, 26, 0.08) 0%, transparent 70%);
+        }
+
+        .about-image-icon {
+            font-size: 10rem;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .about-floating-card {
+            position: absolute;
+            background: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .about-floating-card.card-1 {
+            bottom: -20px;
+            left: -30px;
+            animation-delay: 0s;
+        }
+
+        .about-floating-card.card-2 {
+            top: -20px;
+            right: -30px;
+            animation-delay: 1s;
+        }
+
+        .about-floating-card .card-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+
+        .about-floating-card .card-text {
+            font-weight: 700;
+            color: #0a3d0a;
+            font-size: 0.9rem;
+        }
+
+        .about-floating-card .card-subtext {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .about-text {
+            animation: fadeInRight 0.8s ease-out;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #0a3d0a;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text p {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: #d4e8d4;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .about-feature:hover {
+            background: #c5e1c5;
+            transform: translateX(5px);
+        }
+
+        .about-feature .check {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature span {
+            font-weight: 600;
+            color: #0a3d0a;
+            font-size: 0.9rem;
+        }
+
+        /* ==================== SERVICOS ==================== */
+        .services {
+            padding: 7rem 2rem;
+            background: linear-gradient(180deg, #f9fafb, #fff);
+            position: relative;
+        }
+
+        .services-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(26, 92, 26, 0.05);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #1a5c1a, #4a9e4a);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(26, 92, 26, 0.15);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(26, 92, 26, 0.1), rgba(45, 138, 45, 0.1));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.4s;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .service-card:hover .service-icon svg,
+        .service-card:hover .service-icon path,
+        .service-card:hover .service-icon circle,
+        .service-card:hover .service-icon rect,
+        .service-card:hover .service-icon line,
+        .service-card:hover .service-icon polyline,
+        .service-card:hover .service-icon polygon {
+            stroke: #ffffff !important;
+            fill: none !important;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0a3d0a;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .service-card .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #1a5c1a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            transition: gap 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .service-card:hover .learn-more {
+            gap: 0.6rem;
+        }
+
+        /* ==================== DIFERENCIAIS ==================== */
+        .differentials {
+            padding: 7rem 2rem;
+            background: linear-gradient(135deg, #0a3d0a, #1a5c1a);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .differentials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+        }
+
+        .differentials-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .differentials .section-header h2 {
+            color: #fff;
+        }
+
+        .differentials .section-header p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .differentials .section-tag {
+            background: rgba(255, 255, 255, 0.15);
+            color: #a5d6a7;
+        }
+
+        .diff-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .diff-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s;
+            text-align: center;
+        }
+
+        .diff-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .diff-card .diff-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s;
+        }
+
+        .diff-card:hover .diff-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .diff-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .diff-card p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* ==================== PROCESSO ==================== */
+        .process {
+            padding: 7rem 2rem;
+            background: #fff;
+        }
+
+        .process-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #1a5c1a, #4a9e4a, #1a5c1a);
+            border-radius: 3px;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+            z-index: 2;
+            box-shadow: 0 4px 20px rgba(26, 92, 26, 0.3);
+            transition: all 0.3s;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(26, 92, 26, 0.5);
+        }
+
+        .step-content {
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 16px;
+            flex: 1;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .process-step:hover .step-content {
+            background: #fff;
+            border-color: rgba(26, 92, 26, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            transform: translateX(10px);
+        }
+
+        .step-content h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0a3d0a;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-content p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ==================== DEPOIMENTOS ==================== */
+        .testimonials {
+            padding: 7rem 2rem;
+            background: #f9fafb;
+        }
+
+        .testimonials-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a5c1a, #4a9e4a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-info h4 {
+            font-weight: 700;
+            color: #0a3d0a;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-info span {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .testimonial-quote {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 4rem;
+            color: rgba(26, 92, 26, 0.08);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        /* ==================== CTA ==================== */
+        .cta {
+            padding: 7rem 2rem;
+            background: linear-gradient(135deg, #0a3d0a, #1a5c1a);
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta .btn-white {
+            font-size: 1.1rem;
+            padding: 1.2rem 3rem;
+        }
+
+        /* ==================== CONTATO / FORM ==================== */
+        .contact {
+            padding: 7rem 2rem;
+            background: #fff;
+        }
+
+        .contact-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0a3d0a;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info > p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #c5e1c5;
+            transform: translateX(5px);
+        }
+
+        .contact-item .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item-text h4 {
+            font-weight: 700;
+            color: #0a3d0a;
+            font-size: 0.95rem;
+        }
+
+        .contact-item-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            background: #f9fafb;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0a3d0a;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            background: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #1a5c1a;
+            box-shadow: 0 0 0 4px rgba(26, 92, 26, 0.1);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #1a5c1a, #2d8a2d);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(26, 92, 26, 0.3);
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 92, 26, 0.4);
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            background: #0d3b13;
+            color: #a5d6a7;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand .logo {
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-icon {
+            background: linear-gradient(135deg, #2d8a2d, #4a9e4a);
+        }
+
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col ul li a {
+            color: #a5d6a7;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a5d6a7;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: #1a5c1a;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ==================== WHATSAPP FLOAT ==================== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #25d366;
+            color: #fff;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            z-index: 999;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.5);
+            animation: none;
+        }
+
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 75px;
+            background: #fff;
+            color: #333;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s;
+            pointer-events: none;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ==================== SCROLL ANIMATIONS ==================== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
+        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
+        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
+        .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
+        .animate-on-scroll.delay-5 { transition-delay: 0.5s; }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1024px) {
+            .services-grid,
+            .diff-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.05rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+
+            .about-floating-card {
+                display: none;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid,
+            .diff-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .process-steps::before {
+                left: 20px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== MOBILE NAV ==================== */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: #1b5e20;
+            margin: 5px 0;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .footer-bottom-link:hover {
+            background: #2d8a2d !important;
+            color: #fff !important;
+        }
+
+        /* === COOKIE MODAL === */
+        .cookie-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .cookie-overlay.active {
+            display: flex;
+        }
+
+        .cookie-modal {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 640px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            animation: cookieSlideUp 0.4s ease;
+        }
+        @keyframes cookieSlideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .cookie-modal-header {
+            padding: 28px 32px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .cookie-modal-header h2 {
+            font-size: 1.4rem;
+            color: #1a3a1a;
+            margin: 0 0 6px;
+        }
+        .cookie-modal-header p {
+            font-size: 0.88rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .cookie-modal-body {
+            padding: 24px 32px;
+        }
+
+        .cookie-section {
+            margin-bottom: 22px;
+        }
+        .cookie-section-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a5c1a;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cookie-section p,
+        .cookie-section ul {
+            font-size: 0.85rem;
+            color: #555;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .cookie-section ul {
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+        .cookie-section ul li {
+            margin-bottom: 3px;
+        }
+
+        .cookie-prefs-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .cookie-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 14px;
+            padding: 16px 20px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .cookie-card:hover {
+            border-color: #2d8a2d;
+        }
+        .cookie-card.disabled-card {
+            opacity: 0.7;
+            background: #f9f9f9;
+        }
+        .cookie-card-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            border-radius: 12px;
+            filter: grayscale(100%);
+        }
+        .cookie-card-info {
+            flex: 1;
+        }
+        .cookie-card h4 {
+            font-size: 0.92rem;
+            color: #1a3a1a;
+            margin: 0 0 2px;
+        }
+        .cookie-card p {
+            font-size: 0.78rem;
+            color: #888;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .cookie-card .cookie-toggle {
+            flex-shrink: 0;
+        }
+
+        .cookie-toggle {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+        .cookie-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .cookie-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: #ccc;
+            border-radius: 26px;
+            transition: 0.3s;
+        }
+        .cookie-toggle-slider::before {
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .cookie-toggle input:checked + .cookie-toggle-slider {
+            background: #2d8a2d;
+        }
+        .cookie-toggle input:checked + .cookie-toggle-slider::before {
+            transform: translateX(22px);
+        }
+        .cookie-toggle input:disabled + .cookie-toggle-slider {
+            background: #2d8a2d;
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .cookie-toggle input:disabled + .cookie-toggle-slider::before {
+            transform: translateX(22px);
+        }
+
+        .cookie-modal-footer {
+            padding: 20px 32px 28px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            border-top: 1px solid #eee;
+        }
+        .cookie-btn {
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .cookie-btn-decline {
+            background: #fff;
+            border-color: #ccc;
+            color: #555;
+        }
+        .cookie-btn-decline:hover {
+            border-color: #999;
+            color: #333;
+        }
+        .cookie-btn-save {
+            background: #fff;
+            border-color: #2d8a2d;
+            color: #2d8a2d;
+        }
+        .cookie-btn-save:hover {
+            background: #2d8a2d;
+            color: #fff;
+        }
+        .cookie-btn-accept {
+            background: #2d8a2d;
+            border-color: #2d8a2d;
+            color: #fff;
+        }
+        .cookie-btn-accept:hover {
+            background: #1a5c1a;
+            border-color: #1a5c1a;
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- NAVBAR -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#top" class="logo">
+                <div class="logo-icon" style="background:none;box-shadow:none;padding:0;">
+                    <img src="https://i.postimg.cc/q7vNVDLm/prevencion-logo-header.png" alt="Prevencion Engenharia" style="width:200px;height:52px;object-fit:contain;border-radius:10px;">
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#diferenciais">Diferenciais</a></li>
+                <li><a href="#processo">Processo</a></li>
+                <li><a href="#contato" class="nav-cta">Fale Conosco</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Engenharia de Segurança Contra Incêndio
+            </div>
+            <h1>Protegendo vidas com <span>engenharia e segurança</span></h1>
+            <p>Projetos de combate a incêndio, auto de vistoria do Corpo de Bombeiros e soluções completas em engenharia de segurança para sua edificação.</p>
+            <div class="hero-buttons">
+                <a href="#contato" class="btn btn-white">
+                    Solicitar Orçamento
+                </a>
+                <a href="#servicos" class="btn btn-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                    Nossos Serviços
+                </a>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 120L48 108C96 96 192 72 288 66C384 60 480 72 576 78C672 84 768 84 864 78C960 72 1056 60 1152 60C1248 60 1344 72 1392 78L1440 84V120H0Z" fill="#fff"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- STATS BAR -->
+    <section class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item animate-on-scroll">
+                <div class="stat-number" data-target="500">0</div>
+                <div class="stat-label">Projetos Entregues</div>
+            </div>
+            <div class="stat-item animate-on-scroll delay-1">
+                <div class="stat-number" data-target="15">0</div>
+                <div class="stat-label">Anos de Experiência</div>
+            </div>
+            <div class="stat-item animate-on-scroll delay-2">
+                <div class="stat-number" data-target="98">0</div>
+                <div class="stat-label">% Aprovação no CBM</div>
+            </div>
+            <div class="stat-item animate-on-scroll delay-3">
+                <div class="stat-number" data-target="1000">0</div>
+                <div class="stat-label">Vistorias Aprovadas</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="about" id="sobre">
+        <div class="about-container">
+            <div class="about-image-wrapper">
+                <div class="about-image">
+                    <div class="about-image-icon">
+                        <svg width="180" height="180" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="about-floating-card card-1">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </div>
+                    <div>
+                        <div class="card-text">Aprovado no CBM</div>
+                        <div class="card-subtext">98% de aprovação</div>
+                    </div>
+                </div>
+                <div class="about-floating-card card-2">
+                    <div class="card-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/></svg>
+                    </div>
+                    <div>
+                        <div class="card-text">Engenheiros CREAs</div>
+                        <div class="card-subtext">Equipe certificada</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text">
+                <div class="section-tag">Sobre Nós</div>
+                <h2>Segurança contra incêndio é coisa séria</h2>
+                <p>A <strong>Prevencion Engenharia</strong> é especialista em projetos de segurança contra incêndio e pânico, atuando com excelência na elaboração de projetos técnicos e obtenção do Auto de Vistoria do Corpo de Bombeiros (AVCB).</p>
+                <p>Nossa equipe de engenheiros qualificados garante que sua edificação atenda todas as normas técnicas vigentes, proporcionando segurança jurídica e tranquilidade para proprietários e ocupantes.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <div class="check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>Equipe com CREA ativo</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>Atendimento ágil</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>Conformidade total</span>
+                    </div>
+                    <div class="about-feature">
+                        <div class="check">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                        <span>Suporte completo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICOS -->
+    <section class="services" id="servicos">
+        <div class="services-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Nossos Serviços</div>
+                <h2>Soluções completas em segurança</h2>
+                <p>Oferecemos toda a gama de serviços necessários para garantir a conformidade da sua edificação com as normas de segurança contra incêndio.</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll delay-1">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3>Projeto de Combate a Incêndio</h3>
+                    <p>Elaboração completa de projetos de sistemas de combate a incêndio, incluindo hidrantes, chuveiros automáticos (sprinklers) e detectores.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Projeto%20de%20Combate%20a%20Incêndio." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+                <div class="service-card animate-on-scroll delay-2">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Auto de Vistoria (AVCB)</h3>
+                    <p>Obtenção do Auto de Vistoria do Corpo de Bombeiros, desde a elaboração do projeto até a aprovação final junto ao CBM.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20AVCB%20-%20Auto%20de%20Vistoria%20do%20Corpo%20de%20Bombeiros." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+                <div class="service-card animate-on-scroll delay-3">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                        </svg>
+                    </div>
+                    <h3>Projeto Elétrico de Emergência</h3>
+                    <p>Projetos de iluminação de emergência, sistema de alarme de incêndio e quadros de comando para segurança contra incêndio.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Projeto%20Elétrico%20de%20Emergência." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+                <div class="service-card animate-on-scroll delay-1">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Plano de Emergência</h3>
+                    <p>Elaboração do Plano de Emergência e Combate a Incêndio (PECI), treinamento de brigada de emergência e simulados práticos.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Plano%20de%20Emergência%20e%20Combate%20a%20Incêndio." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+                <div class="service-card animate-on-scroll delay-2">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="3" y1="9" x2="21" y2="9"/>
+                            <line x1="9" y1="21" x2="9" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>Projeto Arquitetônico</h3>
+                    <p>Adequação de projetos arquitetônicos para atendimento às normas de segurança contra incêndio, rotas de fuga e compartimentação.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Projeto%20Arquitetônico%20com%20adequação%20de%20segurança%20contra%20incêndio." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+                <div class="service-card animate-on-scroll delay-3">
+                    <div class="service-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 11l3 3L22 4"/>
+                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                        </svg>
+                    </div>
+                    <h3>Consultoria Técnica</h3>
+                    <p>Consultoria especializada para adequação de edificações existentes, regularização e acompanhamento junto aos órgãos competentes.</p>
+                    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20Consultoria%20Técnica%20em%20segurança%20contra%20incêndio." class="learn-more" target="_blank">Saiba mais &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="differentials" id="diferenciais">
+        <div class="differentials-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Por que nos escolher</div>
+                <h2>Nossos Diferenciais</h2>
+                <p>Comprometimento com a excelência e a segurança da sua edificação.</p>
+                <div class="section-line" style="background: linear-gradient(90deg, #a5d6a7, #c8e6c9);"></div>
+            </div>
+            <div class="diff-grid">
+                <div class="diff-card animate-on-scroll delay-1">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </div>
+                    <h3>Agilidade na Entrega</h3>
+                    <p>Prazos reduzidos sem comprometer a qualidade. Entregamos seu projeto no menor tempo possível.</p>
+                </div>
+                <div class="diff-card animate-on-scroll delay-2">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                    </div>
+                    <h3>98% de Aprovação</h3>
+                    <p>Alto índice de aprovação junto ao Corpo de Bombeiros graças à qualidade técnica dos nossos projetos.</p>
+                </div>
+                <div class="diff-card animate-on-scroll delay-3">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                    </div>
+                    <h3>Equipe Especializada</h3>
+                    <p>Engenheiros com CREA ativo e ampla experiência em projetos de segurança contra incêndio.</p>
+                </div>
+                <div class="diff-card animate-on-scroll delay-1">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h3>Documentação Completa</h3>
+                    <p>Toda a documentação técnica necessária para aprovação junto aos órgãos competentes.</p>
+                </div>
+                <div class="diff-card animate-on-scroll delay-2">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    </div>
+                    <h3>Suporte Total</h3>
+                    <p>Acompanhamento completo desde a elaboração do projeto até a emissão final do AVCB.</p>
+                </div>
+                <div class="diff-card animate-on-scroll delay-3">
+                    <div class="diff-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                    </div>
+                    <h3>Preço Justo</h3>
+                    <p>Orçamentos transparentes e competitivos, sem custos ocultos ou surpresas no decorrer do projeto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESSO -->
+    <section class="process" id="processo">
+        <div class="process-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Como Trabalhamos</div>
+                <h2>Nosso Processo</h2>
+                <p>Do primeiro contato até a aprovação final, cuidamos de cada etapa com excelência.</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="process-steps">
+                <div class="process-step animate-on-scroll delay-1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Consulta Inicial</h3>
+                        <p>Analisamos as características da sua edificação e identificamos todas as exigências do Corpo de Bombeiros para o seu caso específico.</p>
+                    </div>
+                </div>
+                <div class="process-step animate-on-scroll delay-2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Elaboração do Projeto</h3>
+                        <p>Nossa equipe técnica elabora o projeto completo de segurança contra incêndio, atendendo todas as normas técnicas vigentes (IT's do CBM).</p>
+                    </div>
+                </div>
+                <div class="process-step animate-on-scroll delay-3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Entrega e Acompanhamento</h3>
+                        <p>Entregamos toda a documentação e acompanhamos o processo de análise junto ao Corpo de Bombeiros até a aprovação final.</p>
+                    </div>
+                </div>
+                <div class="process-step animate-on-scroll delay-4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Emissão do AVCB</h3>
+                        <p>Após aprovação, acompanhamos a vistoria final e a emissão do Auto de Vistoria do Corpo de Bombeiros para sua edificação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="testimonials">
+        <div class="testimonials-container">
+            <div class="section-header animate-on-scroll">
+                <div class="section-tag">Depoimentos</div>
+                <h2>O que nossos clientes dizem</h2>
+                <p>A satisfação dos nossos clientes é o nosso maior reconhecimento.</p>
+                <div class="section-line"></div>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll delay-1">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"A Prevencion entregou nosso projeto com agilidade e o AVCB foi aprovado na primeira vistoria. Profissionalismo exemplar!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MC</div>
+                        <div class="testimonial-info">
+                            <h4>Marcos Costa</h4>
+                            <span>Administrador de Condomínio</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll delay-2">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"Excelente atendimento do início ao fim. A equipe é muito atenciosa e resolveu todas as pendências do nosso imóvel rapidamente."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AS</div>
+                        <div class="testimonial-info">
+                            <h4>Ana Silva</h4>
+                            <span>Proprietária de Edifício Comercial</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll delay-3">
+                    <div class="testimonial-quote">&ldquo;</div>
+                    <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <p class="testimonial-text">"Já trabalhamos com a Prevencion em 3 projetos diferentes. A qualidade técnica e o comprometimento da equipe são impecáveis."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">RL</div>
+                        <div class="testimonial-info">
+                            <h4>Roberto Lima</h4>
+                            <span>Engenheiro Civil</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-content animate-on-scroll">
+            <h2>Sua edificação está regularizada?</h2>
+            <p>Não espere uma fiscalização. Entre em contato agora mesmo e garanta a segurança e a conformidade do seu imóvel com as normas do Corpo de Bombeiros.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20projeto%20de%20segurança%20contra%20incêndio." class="btn btn-white">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Solicitar Orçamento via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="contact" id="contato">
+        <div class="contact-container">
+            <div class="contact-info animate-on-scroll">
+                <h2>Fale Conosco</h2>
+                <p>Estamos prontos para atender sua demanda. Entre em contato e solicite um orçamento sem compromisso.</p>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+                    </div>
+                    <div class="contact-item-text">
+                        <h4>Telefone</h4>
+                        <p>(14) 99766-5882</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    </div>
+                    <div class="contact-item-text">
+                        <h4>E-mail</h4>
+                        <p>denis@prevencion.eng.br</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div class="contact-item-text">
+                        <h4>Endereço</h4>
+                        <p>Bauru - SP</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form animate-on-scroll delay-2">
+                <h3>Solicite um Orçamento</h3>
+                <form onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nome Completo</label>
+                            <input type="text" placeholder="Seu nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="tel" placeholder="(00) 00000-0000" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail</label>
+                        <input type="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de Serviço</label>
+                        <select required>
+                            <option value="">Selecione o serviço</option>
+                            <option value="avcb">Auto de Vistoria (AVCB)</option>
+                            <option value="projeto">Projeto de Combate a Incêndio</option>
+                            <option value="emergencia">Projeto Elétrico de Emergência</option>
+                            <option value="plano">Plano de Emergência</option>
+                            <option value="consultoria">Consultoria Técnica</option>
+                            <option value="outro">Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea placeholder="Descreva sua necessidade..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a class="logo">
+                    <div class="logo-icon" style="background:none;box-shadow:none;padding:0;">
+                        <img src="https://i.postimg.cc/q7vNVDLm/prevencion-logo-header.png" alt="Prevencion Engenharia" style="width:40px;height:40px;object-fit:contain;border-radius:10px;">
+                    </div>
+                    Prevencion Engenharia
+                </a>
+                <p>Segurança contra incêndio com excelência técnica e comprometimento com a vida. Conosco é sempre seguro, nós mantemos a disposição!</p>
+                <div class="footer-social">
+                    </a>
+                    <a href="https://www.instagram.com/prevencion_engenharia/" title="Instagram">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#servicos">Projeto de Incêndio</a></li>
+                    <li><a href="#servicos">AVCB</a></li>
+                    <li><a href="#servicos">Projeto Elétrico</a></li>
+                    <li><a href="#servicos">Plano de Emergência</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Empresa</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#diferenciais">Diferenciais</a></li>
+                    <li><a href="#processo">Processo</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">(14) 99766-5882</a></li>
+                    <li><a href="#">denis@prevencion.eng.br</a></li>
+                    <li><a href="#">Bauru - SP</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center;">
+                <p style="margin:0;">&copy; 2026 Prevencion Engenharia. Todos os direitos reservados.</p>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <a href="https://0mrtnll.github.io/preve-politicas/" class="footer-bottom-link" data-link="privacidade" style="display:inline-block;padding:6px 16px;border:1.5px solid #2d8a2d;color:#2d8a2d;text-decoration:none;border-radius:8px;font-size:0.85rem;font-weight:600;transition:all 0.3s;">Política de Privacidade</a>
+                    <a href="#" class="footer-bottom-link" data-link="cookies" style="display:inline-block;padding:6px 16px;border:1.5px solid #2d8a2d;color:#2d8a2d;text-decoration:none;border-radius:8px;font-size:0.85rem;font-weight:600;transition:all 0.3s;">Gerenciar Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/5514997665882?text=Olá!%20Gostaria%20de%20um%20orçamento%20para%20projeto%20de%20segurança%20contra%20incêndio." class="whatsapp-float" title="Fale conosco no WhatsApp">
+        <span class="whatsapp-tooltip">Fale conosco!</span>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
+    <script>
+        // ==================== NAVBAR SCROLL ====================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ==================== PARTICLES ====================
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const count = 30;
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 6 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                particle.style.animationDelay = (Math.random() * 5) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ==================== SCROLL ANIMATIONS ====================
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ==================== COUNTER ANIMATION ====================
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const start = 0;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeOut = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.floor(easeOut * target);
+                    counter.textContent = current + (target > 100 ? '+' : target === 98 ? '%' : '+');
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    }
+                }
+
+                requestAnimationFrame(updateCounter);
+            });
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) statsObserver.observe(statsBar);
+
+        // ==================== SMOOTH SCROLL ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ==================== FORM SUBMIT ====================
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            e.target.reset();
+        }
+
+        // ==================== MOBILE MENU ====================
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+
+    <!-- COOKIE MODAL -->
+    <div class="cookie-overlay" id="cookieOverlay">
+        <div class="cookie-modal">
+            <div class="cookie-modal-header">
+                <h2>Política de Cookies &amp; LGPD</h2>
+                <p>Lei nº 13.709/2018 — Lei Geral de Proteção de Dados Pessoais. Gerencie suas preferências abaixo.</p>
+            </div>
+            <div class="cookie-modal-body">
+
+                <!-- Dados coletados -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                        Dados que Coletamos
+                    </div>
+                    <ul>
+                        <li><strong>Dados de navegação:</strong> endereço IP, tipo de navegador, páginas visitadas, tempo de permanência e origem da visita.</li>
+                        <li><strong>Dados fornecidos pelo usuário:</strong> nome, e-mail, telefone e mensagem enviados pelo formulário de contato.</li>
+                        <li><strong>Cookies:</strong> informações armazenadas no seu dispositivo para melhorar a experiência de navegação.</li>
+                    </ul>
+                </div>
+
+                <!-- Finalidade -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        Para que Usamos
+                    </div>
+                    <ul>
+                        <li>Garantir o funcionamento adequado do site e seus recursos.</li>
+                        <li>Responder às solicitações enviadas pelo formulário de contato.</li>
+                        <li>Analisar o tráfego e comportamento de navegação para melhorar nossos serviços.</li>
+                        <li>Enviar comunicações de marketing, mediante consentimento.</li>
+                        <li>Cumprir obrigações legais e regulatórias aplicáveis.</li>
+                    </ul>
+                </div>
+
+                <!-- Base legal -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Base Legal
+                    </div>
+                    <p>O tratamento de dados pessoais realizado por este site fundamenta-se nas bases legais previstas no <strong>Art. 7º da LGPD</strong>, conforme aplicável:</p>
+                    <ul>
+                        <li><strong>Art. 7º, I — Consentimento:</strong> para cookies não essenciais e comunicações de marketing.</li>
+                        <li><strong>Art. 7º, II — Cumprimento de obrigação legal:</strong> para atendimento de exigências regulatórias.</li>
+                        <li><strong>Art. 7º, V — Execução de contrato:</strong> para responder solicitações e prestar serviços.</li>
+                        <li><strong>Art. 7º, IX — Interesse legítimo:</strong> para análise de tráfego e melhoria do site.</li>
+                    </ul>
+                </div>
+
+                <!-- Compartilhamento -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        Compartilhamento de Dados
+                    </div>
+                    <p>Não vendemos, comercializamos ou compartilhamos seus dados pessoais com terceiros para fins comerciais. Os dados poderão ser compartilhados apenas com:</p>
+                    <ul>
+                        <li>Prestadores de serviços tecnológicos (hospedagem, analytics) que atuam como operadores de dados, conforme a LGPD.</li>
+                        <li>Autoridades públicas, quando exigido por lei ou ordem judicial.</li>
+                    </ul>
+                </div>
+
+                <!-- Seus direitos -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        Seus Direitos (LGPD — Art. 18)
+                    </div>
+                    <p>Você pode, a qualquer momento, exercer os seguintes direitos:</p>
+                    <ul>
+                        <li>Confirmação da existência de tratamento dos seus dados.</li>
+                        <li>Acesso aos dados pessoais tratados.</li>
+                        <li>Correção de dados incompletos, inexatos ou desatualizados.</li>
+                        <li>Anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade.</li>
+                        <li>Portabilidade dos dados a outro fornecedor de serviço.</li>
+                        <li>Eliminação dos dados tratados com o seu consentimento.</li>
+                        <li>Informação sobre compartilhamento e possibilidade de revogação do consentimento.</li>
+                    </ul>
+                </div>
+
+                <!-- Preferências de Cookies -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5c0-1.1.9-2 2-2"/></svg>
+                        Preferências de Cookies
+                    </div>
+                </div>
+                <div class="cookie-prefs-grid">
+                    <!-- Essenciais -->
+                    <div class="cookie-card disabled-card">
+                        <div class="cookie-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+                        </div>
+                        <div class="cookie-card-info">
+                            <h4>Cookies Essenciais</h4>
+                            <p>Necessários para o funcionamento do site. Não podem ser desativados.</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" checked disabled id="cookieEssential">
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                    <!-- Análise -->
+                    <div class="cookie-card">
+                        <div class="cookie-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                        </div>
+                        <div class="cookie-card-info">
+                            <h4>Cookies de Análise</h4>
+                            <p>Nos ajudam a entender como você usa o site e melhorar a experiência.</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" checked id="cookieAnalytics">
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                    <!-- Marketing -->
+                    <div class="cookie-card">
+                        <div class="cookie-card-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                        </div>
+                        <div class="cookie-card-info">
+                            <h4>Cookies de Marketing</h4>
+                            <p>Usados para exibir conteúdo e anúncios relevantes para você.</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" checked id="cookieMarketing">
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Retenção e Segurança -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        Retenção e Segurança
+                    </div>
+                    <p>Seus dados pessoais são armazenados pelo tempo estritamente necessário para cumprir as finalidades descritas nesta política, respeitando os prazos legais aplicáveis. Utilizamos medidas técnicas e organizacionais adequadas para proteger seus dados contra acessos não autorizados, perda, alteração ou divulgação indevida.</p>
+                </div>
+
+                <!-- Mais informações -->
+                <div class="cookie-section">
+                    <div class="cookie-section-title">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a5c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        Mais Informações
+                    </div>
+                    <p>Para exercer seus direitos previstos no Art. 18 da LGPD ou esclarecer dúvidas sobre esta política, entre em contato conosco pelo e-mail ou telefone disponíveis no rodapé deste site. O Encarregado de Dados (DPO) está à disposição para atendê-lo.</p>
+                </div>
+
+            </div>
+            <div class="cookie-modal-footer">
+                <button class="cookie-btn cookie-btn-decline" id="cookieDecline">Recusar Todos</button>
+                <button class="cookie-btn cookie-btn-save" id="cookieSave">Salvar Preferências</button>
+                <button class="cookie-btn cookie-btn-accept" id="cookieAccept">Aceitar Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === COOKIE MODAL LOGIC ===
+        (function() {
+            var overlay = document.getElementById('cookieOverlay');
+            var analytics = document.getElementById('cookieAnalytics');
+            var marketing = document.getElementById('cookieMarketing');
+
+            // Abrir modal ao clicar em "Gerenciar Cookies"
+            document.querySelector('[data-link="cookies"]').addEventListener('click', function(e) {
+                e.preventDefault();
+                overlay.classList.add('active');
+            });
+
+            // Fechar ao clicar fora do modal
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                }
+            });
+
+            // Recusar Todos
+            document.getElementById('cookieDecline').addEventListener('click', function() {
+                analytics.checked = false;
+                marketing.checked = false;
+                overlay.classList.remove('active');
+                // Aqui você pode adicionar a lógica de salvar no localStorage
+                localStorage.setItem('cookiePrefs', JSON.stringify({ analytics: false, marketing: false }));
+            });
+
+            // Salvar Preferências
+            document.getElementById('cookieSave').addEventListener('click', function() {
+                overlay.classList.remove('active');
+                localStorage.setItem('cookiePrefs', JSON.stringify({ analytics: analytics.checked, marketing: marketing.checked }));
+            });
+
+            // Aceitar Todos
+            document.getElementById('cookieAccept').addEventListener('click', function() {
+                analytics.checked = true;
+                marketing.checked = true;
+                overlay.classList.remove('active');
+                localStorage.setItem('cookiePrefs', JSON.stringify({ analytics: true, marketing: true }));
+            });
+        })();
+    </script>
+
+</body>
+</html>
